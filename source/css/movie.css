@@ -1,0 +1,57 @@
+section{
+    padding: 20px 20px;
+}
+
+.margin-1{
+	margin-top: 50px;
+}
+
+.margin-4{
+	margin-bottom: 30px;
+}
+
+.shadow-1{
+	box-shadow: 6px 6px 20px #ccc;
+	padding: 10px;
+    min-height: 360px;
+}
+.shadow-2{
+	box-shadow: 6px 6px 20px #ccc;
+	padding: 10px;
+}
+
+.detail{
+    font-size: 25px;
+	text-align: center;
+}
+
+.detail-1{
+    font-size: 20px;
+	text-align: left;
+}
+
+.detail-2{
+    font-size: 30px;
+	text-align: left;
+    margin-bottom: 5px;
+}
+
+.btn{
+    margin-top: 15px;
+}
+.btn-primary{
+    margin-bottom: 15px;
+}
+
+.btn-plcce{
+    text-align: right;
+}
+
+.update_img{
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.update_field{
+    margin-bottom: 15px;
+}
