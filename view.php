@@ -40,7 +40,7 @@ $conn = mysqli_connect('localhost', 'root', '', 'movie_management') or die('conn
         <div class="shadow-2 margin-4">
             <div class="row">
                 <div class="col-md-4">
-                    <img class="img-fluid" src="uploarded_img/<?php echo $fetch_movies['image']; ?>" alt="">
+                    <img class="img-fluid" src="<?php echo $fetch_movies['image']; ?>" alt="" style="height:250px; width: 350px;">
                 </div>
                 <div class="col-md-8">
                     <div class="detail-2"><strong><?php echo $fetch_movies['name']; ?></strong></div>
