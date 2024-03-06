@@ -42,6 +42,7 @@ $conn = mysqli_connect('localhost', 'root', '', 'movie_management') or die('conn
                     <img class="img-fluid" src="uploarded_img/<?php echo $fetch_movies['image']; ?>" alt="">
                     <div class="detail"><strong><?php echo $fetch_movies['name']; ?></strong></div>
                     <a href="view.php?view=<?php echo $fetch_movies['id']; ?>" class="btn btn-warning">View Details</a>
+                    <a href="delete.php?delete=<?php echo $fetch_movies['id']; ?>" class="btn btn-danger">Delete Movie</a>
                     
                 </div>
             </div>
