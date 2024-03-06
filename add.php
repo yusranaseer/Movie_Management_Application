@@ -12,19 +12,33 @@ if(isset($_POST['add_movie'])){
     $date =  $_POST['date'];
     $actor =  $_POST['actor'];
     $director =  $_POST['director'];
-    $image =  $_FILES['image']['name'];
+
     $image_size =  $_FILES['image']['size'];
-    $image_temp_name =  $_FILES['image']['tmp_name'];
-    $image_folder = 'uploarded_img/'.$image;
+    //image
+    $v1=rand(1,9);
+    $v2=rand(1,9);
 
-    $query = "SELECT name FROM movie WHERE name = '$name'";
-    $select_movie_name = mysqli_query($conn, $query);
+    $v3=$v1.$v2;
 
-    if(mysqli_num_rows($select_movie_name) > 0){
-        $message[] = 'movie name alredy added';
-    }else{
-        $add_movie_query = "INSERT INTO movie(name, genre, image, date, actor, director) VALUES('$name', '$genre', '$image', '$date', '$actor', '$director')";
-        mysqli_query($conn, $add_movie_query); 
+    $fnm=$_FILES["image"]["name"];
+    $dst="uploarded_img/".$v3.$fnm;
+    move_uploaded_file($_FILES["image"]["tmp_name"],$dst);
+    //end image
+
+
+    if($name == null || $genre == null || $date == null || $actor == null || $director == null || $fnm == null){
+        $message[] = 'Empty Fields!!!';
+    }
+    else{
+        $query = "SELECT name FROM movie WHERE name = '$name'";
+        $select_movie_name = mysqli_query($conn, $query);
+
+        if(mysqli_num_rows($select_movie_name) > 0){
+            $message[] = 'movie name already added';
+        }else{
+            $add_movie_query = "INSERT INTO movie(name, genre, image, date, actor, director) VALUES('$name', '$genre', '$dst', '$date', '$actor', '$director')";
+            mysqli_query($conn, $add_movie_query); 
+        }
     }
 
     header('location:index.php');
