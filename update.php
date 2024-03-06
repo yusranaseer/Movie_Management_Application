@@ -14,21 +14,34 @@ if(isset($_POST['update_movie'])){
     $update_actor = $_POST['update_actor'];
     $update_director = $_POST['update_director'];
 
-    mysqli_query($conn, "UPDATE movie SET name ='$update_name', genre ='$update_genre', date ='$update_date', actor ='$update_actor', director ='$update_director' WHERE id = '$update_p_id'");
+    if($update_name == null || $update_genre == null || $update_date == null || $update_actor == null || $update_director == null){
+        $message[] = 'Empty Field!!!';
+    }
+    else{
+        mysqli_query($conn, "UPDATE movie SET name ='$update_name', genre ='$update_genre', date ='$update_date', actor ='$update_actor', director ='$update_director' WHERE id = '$update_p_id'");
+    }
+
+     //image
+     $v1=rand(1,9);
+     $v2=rand(1,9);
+ 
+     $v3=$v1.$v2;
+ 
+     $fnm=$_FILES["update_image"]["name"];
+     $dst="uploarded_img/".$v3.$fnm;
+     //end image
 
     $update_image = $_FILES['update_image']['name'];
     $update_image_tmp_name = $_FILES['update_image']['tmp_name'];
     $update_image_size = $_FILES['update_image']['size'];
-    $update_folder = 'uploarded_img/'.$update_image;
-    $update_old_image = $_POST['update_old_image'];
+    $update_folder =  $dst;
 
     if(!empty($update_image)){
         if($update_image_size > 2000000){
             $message[] = 'image size is too large';            
         }else{
-            mysqli_query($conn, "UPDATE movie SET image ='$update_image' WHERE id = '$update_p_id'");
-            move_uploaded_file($update_image_tmp_name, $update_folder);
-            unlink('uploarded_img/'.$update_old_image);
+            move_uploaded_file($_FILES["update_image"]["tmp_name"],$dst);
+            mysqli_query($conn, "UPDATE movie SET image ='$dst' WHERE id = '$update_p_id'");
         }
     }
     header('location:index.php');
@@ -66,7 +79,6 @@ if(isset($_POST['update_movie'])){
     ?>
     <form action="" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="update_p_id" value="<?php echo $fetch_update['id']; ?>">
-        <input type="hidden" name="update_old_image" value="<?php echo $fetch_update['image']; ?>">
         <div class="update_img"><img src="uploarded_img/<?php echo $fetch_update['image']; ?>" alt=""></div>
         <div class="form-group">
             <label for="title">Title</label>
